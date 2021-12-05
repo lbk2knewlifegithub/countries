@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { delay, Observable, of, tap } from 'rxjs';
+import { delay, finalize, Observable, of } from 'rxjs';
 import { AppState } from 'src/app/state/app.state';
 import { setLoading } from 'src/app/state/shared-state/shared.actions';
 import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { CountryFilter } from '../../model/country-filter.model';
 import { Country } from '../../model/country.model';
-import { Result } from '../../model/result.model';
 import { CountriesRepo } from './countries.repo';
 
 /**
@@ -255,7 +254,7 @@ export class CountriesRepoFake extends CountriesRepo {
     super();
   }
 
-  getAllCountries(filter: CountryFilter): Observable<Result<Country[]>> {
+  getAllCountries(filter: CountryFilter): Observable<Country[]> {
     const { region, name } = filter;
     // filter by region
     let result: Country[] = [...countriesFake];
@@ -272,20 +271,13 @@ export class CountriesRepoFake extends CountriesRepo {
       console.log(result);
     }
 
-    return this.delay<Result<Country[]>>(
-      of({
-        result: result,
-        totalResult: result.length,
-        page: 1,
-        pageSize: 20,
-      })
-    );
+    return this.delay<Country[]>(of(result));
   }
 
   findCountryByFullName(fullName: string): Observable<Country | undefined> {
     // Find country by name
-    const country = countriesFake.find(
-      (country) => country.name.toLowerCase() === fullName.toLowerCase()
+    const country = countriesFake.find((country) =>
+      country.name.toLowerCase().includes(fullName.toLowerCase())
     );
 
     // Not found country will return undefined
@@ -306,9 +298,10 @@ export class CountriesRepoFake extends CountriesRepo {
 
   private delay<T>(observable: Observable<T>): Observable<T> {
     this._store.dispatch(setLoading({ loading: true }));
+
     return observable.pipe(
-      delay(1000 + Math.random() * 400),
-      tap(() => {
+      delay(2000),
+      finalize(() => {
         this._store.dispatch(setLoading({ loading: false }));
       })
     );
@@ -318,9 +311,9 @@ export class CountriesRepoFake extends CountriesRepo {
     return countriesFake.find((country) => country.cca3 === code);
   }
 
-  findCountryByCCA3(cca3: string): Observable<Country | undefined> {
-    throw new Error('Not Implement yet');
-  }
+  getCountryByCode(code: string): Observable<Country | undefined> {
+    return this.delay<Country>(of(countriesFake[0]));
+   }
 
   findCountryById(id: string): Observable<Country | undefined> {
     throw new Error('Not implement yet');

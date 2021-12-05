@@ -1,13 +1,11 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
+  ChangeDetectionStrategy, Component,
   OnInit
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Unsubscribe } from './shared/components/unsubscribe.component';
-import { LoadingService } from './shared/service/loading.service';
-import { ThemeService } from './shared/service/theme.service';
+import { AppState } from './state/app.state';
+import { getLoading } from './state/shared-state/shared.selector';
 
 @Component({
   selector: 'lbk-root',
@@ -16,43 +14,11 @@ import { ThemeService } from './shared/service/theme.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent extends Unsubscribe implements OnInit {
-  isLoading!: boolean;
-
-  constructor(
-    readonly themeService: ThemeService,
-    private loadingService: LoadingService,
-    private router: Router,
-    private _ref: ChangeDetectorRef
-  ) {
+  loading$ = this._store.select(getLoading);
+  constructor(private readonly _store: Store<AppState>) {
     super();
   }
 
   ngOnInit() {
-    this.appendSub = this.loadingService.isLoading$.subscribe((isLoading) => {
-      this.isLoading = isLoading;
-      this._ref.detectChanges();
-    });
-
-    //
-    // this.router.events
-    //   .pipe(
-    //     filter(
-    //       event =>
-    //         event instanceof NavigationStart ||
-    //         event instanceof NavigationEnd ||
-    //         event instanceof NavigationCancel ||
-    //         event instanceof NavigationError
-    //     )
-    //   )
-    //   .subscribe(event => {
-    //     // If it's the start of navigation, `add()` a loading indicator
-    //     if (event instanceof NavigationStart) {
-    //       this.isLoadingService.add();
-    //       return;
-    //     }
-    //
-    //     // Else navigation has ended, so `remove()` a loading indicator
-    //     this.isLoadingService.remove();
-    //   });
   }
 }

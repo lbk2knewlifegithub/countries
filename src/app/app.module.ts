@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ProcessBarLoadingModule } from './shared/components/process-bar-loading/process-bar-loading.module';
 import { ThemeComponent } from './shared/components/theme/theme.component';
 import { LoadingInterceptor } from './shared/interceptor/loading.interceptor';
 import { HeaderComponent } from './shared/layout/header/header.component';
@@ -28,6 +29,7 @@ import { CountriesEffect } from './state/countries/countries.effect';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
+    ProcessBarLoadingModule,
     StoreModule.forRoot(appReducer),
     EffectsModule.forRoot([CountriesEffect]),
   ],

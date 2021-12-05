@@ -1,10 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { catchError, Observable, of, switchMap } from 'rxjs';
 import { Unsubscribe } from 'src/app/shared/components/unsubscribe.component';
 import { CountriesRepoFake } from 'src/app/shared/repo/countries/countries-fake.repo';
-import { LoadingService } from 'src/app/shared/service/loading.service';
+import { CountriesRepoImpl } from 'src/app/shared/repo/countries/countries-impl.repo';
+import { AppState } from 'src/app/state/app.state';
+import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { Country } from '../../shared/model/country.model';
 import { CountriesRepo } from '../../shared/repo/countries/countries.repo';
 
@@ -15,21 +18,23 @@ import { CountriesRepo } from '../../shared/repo/countries/countries.repo';
 })
 export class CountryDetailComponent extends Unsubscribe implements OnInit {
   country$!: Observable<Country | undefined>;
-  isLoading$!: Observable<any>;
+  loading$ = this._store.select(getLoading);
 
   constructor(
     private readonly _route: ActivatedRoute,
-    @Inject(CountriesRepoFake)
+    @Inject(CountriesRepoImpl)
     readonly countriesRepo: CountriesRepo,
-    private readonly _loadingService: LoadingService,
-    private readonly _location: Location
+    private readonly _location: Location,
+    private readonly _store: Store<AppState>
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.isLoading$ = this._loadingService.isLoading$;
     this.fetchCountry();
+    this.loading$.subscribe((loading) => {
+      console.log(loading);
+    });
   }
 
   fetchCountry(): void {
@@ -38,7 +43,6 @@ export class CountryDetailComponent extends Unsubscribe implements OnInit {
         this.countriesRepo.findCountryByFullName(params?.['fullName'])
       ),
       catchError((error) => {
-        console.error(error);
         return of(undefined);
       })
     );

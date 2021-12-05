@@ -1,0 +1,5 @@
+<lbk-circle-loading-small *ngIf="country$ | async as country;else border"></lbk-circle-loading-small>
+
+<ng-template #border>
+  <a class="px-6 py-2 rounded-md shadow-lg" href="#">{{}}</a>
+</ng-template>
