@@ -1,0 +1,24 @@
+<div class="flex items-center gap-2 text-sm lg:text-lg">
+
+  <!-- how the sun and the moon were make? -->
+  <div>
+
+    <!-- moon -->
+    <ng-container *ngIf="isDarkTheme; else sun">
+      <i class="fas fa-moon"></i>
+    </ng-container>
+    <!-- end moon -->
+
+    <!-- sun  -->
+    <ng-template #sun>
+      <i #sun class="fas fa-sun"></i>
+    </ng-template>
+    <!-- end sun  -->
+  </div>
+  <!-- end how the sun and the moon were make? -->
+
+
+  <!--  theme name-->
+  <p class="font-semibold">{{ name }}</p>
+  <!--  end theme name-->
+</div>

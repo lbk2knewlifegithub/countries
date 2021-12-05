@@ -1,0 +1,27 @@
+<div  class="overflow-hidden rounded-md shadow-lg">
+  <!--  flag-->
+  <img class="w-full h-full shadow-sm" [src]="country.flag" [alt]="country.name">
+  <!--  end flag-->
+
+  <!--  content-->
+  <div class="grid gap-4 p-8">
+    <!--  country name-->
+    <h3 class="text-xl font-black">{{country.name}} </h3>
+    <!--  end country name-->
+
+    <div>
+      <!--  population-->
+      <p><span class="font-semibold">Population:</span> {{country.population | number }}</p>
+      <!--  end population-->
+
+      <!--  region-->
+      <p><span class="font-semibold">Region:</span> {{country.region}}</p>
+      <!--  end region-->
+
+      <!--  capital-->
+      <p><span class="font-semibold">Capital:</span> {{country.capital}}</p>
+      <!--  end capital-->
+    </div>
+  </div>
+  <!--  end content-->
+</div>

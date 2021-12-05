@@ -1,0 +1,31 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  .dropdown-items {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+    display: grid;
+    pointer-events: none;
+
+    &.center-bottom {
+      min-width: 100%;
+      left: 0;
+      top: calc(100% + 10px);
+      place-content: center;
+      place-items: center;
+      transform: translate(-50%, 2rem);
+    }
+
+    &.active {
+      opacity: 1;
+      z-index: 9999;
+      pointer-events: auto;
+
+      &.center-bottom {
+        transform: translate(-50%, 0);
+      }
+    }
+  }
+}

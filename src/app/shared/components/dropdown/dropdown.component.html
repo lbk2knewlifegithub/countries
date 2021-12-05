@@ -1,0 +1,14 @@
+<div class="dropdown">
+  <!-- button -->
+  <button (blur)="onBlur($event)" (click)="onClick()" type="button" class="rounded-lg focus:ring-4 focus:ring-indigo-400">
+    <ng-content select="[role=button]"></ng-content>
+  </button>
+  <!-- end button -->
+
+  <!-- items -->
+  <div [class.active]='active' class='dropdown-items center-bottom'>
+    <ng-content select="[role=items]"></ng-content>
+  </div>
+  <!-- end items -->
+
+</div>

@@ -1,0 +1,30 @@
+<div class='container pb-20 mt-8'>
+  <nav class="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
+    <!--    search bar-->
+    <lbk-search-bar class="block max-w-lg md:flex-grow"></lbk-search-bar>
+    <!--    end search bar-->
+
+    <!--    filter-->
+    <lbk-filter class="block "></lbk-filter>
+    <!--    filter-->
+  </nav>
+
+
+  <!--    main countries-->
+  <main *ngIf='countries$ | async as countries'>
+    <!--    countries grid-->
+    <lbk-countries-grid *ngIf="countries.length > 0; else empty" [countries]='countries'></lbk-countries-grid>
+    <!--    end countries grid-->
+
+
+    <!-- no countries -->
+    <ng-template #empty>
+      <div class="mt-20">
+        <h1 class="text-3xl italic font-bold text-center">Countries not found</h1>
+      </div>
+    </ng-template>
+    <!-- end no countries -->
+  </main>
+  <!--    end main countries-->
+
+</div>

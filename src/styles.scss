@@ -1,1 +1,83 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  :root {
+    // light mode text
+    --very-dark-blue-1: 200, 15%, 8%;
+    // light mode input
+    --dark-gray: 0, 0%, 52%;
+    // Light Mode Background
+    --very-light-gray: 0, 0%, 98%;
+
+    // Dark Mode Elements
+    --dark-blue: 209, 23%, 22%;
+    // Dark Mode Background
+    --very-dark-blue: 207, 26%, 17%;
+    // Dark Mode Text & Light Mode Elements
+    --white: 0, 0%, 100%;
+
+    ////////////////////
+    // text colors /////
+    ////////////////////
+    --text-fill: var(--very-dark-blue-1);
+
+    /////////////////////////////
+    // background colors ////////
+    /////////////////////////////
+    --bg-fill: var(--very-light-gray);
+    --bg-input: var(--dark-gray);
+
+    .dark-theme {
+      ////////////////////
+      // text colors /////
+      ////////////////////
+      --text-fill: var(--white);
+
+      /////////////////////////////
+      // background colors ////////
+      /////////////////////////////
+      --bg-fill: var(--very-dark-blue);
+      --bg-input: var(--dark-blue);
+    }
+  }
+
+  //make default form look nice
+  [type="text"],
+  [type="email"],
+  select {
+    @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-offset-4 focus:ring-indigo-500;
+  }
+}
+
+input.ng-invalid.ng-touched {
+  // @apply border-2 border-danger;
+}
+
+@layer components {
+  .container-large {
+    max-width: 1536px;
+    margin: 0 auto;
+  }
+
+  .filter-white {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(112deg)
+      brightness(103%) contrast(101%);
+  }
+
+  //CUSTOM APPLY HERE
+  // .btn {
+  //   @apply inline-block text-white font-bold text-center rounded-lg py-4;
+  // }
+
+  // .btn-primary {
+  //   @apply bg-button-primary;
+  //   box-shadow: 0px 8px 2px rgba(0, 0, 0, 0.15);
+  // }
+
+  // .btn-success {
+  //   @apply bg-button-success uppercase tracking-wider;
+  //   box-shadow: inset 0px -8px 8px rgba(0, 0, 0, 0.25);
+  // }
+}
