@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { delay, Observable, of, tap } from 'rxjs';
+import { AppState } from 'src/app/state/app.state';
+import { setLoading } from 'src/app/state/shared-state/shared.actions';
+import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { CountryFilter } from '../../model/country-filter.model';
 import { Country } from '../../model/country.model';
 import { Result } from '../../model/result.model';
-import { LoadingService } from '../../service/loading.service';
 import { CountriesRepo } from './countries.repo';
 
 /**
@@ -246,7 +249,9 @@ const countriesFake: Country[] = [
 
 @Injectable({ providedIn: 'root' })
 export class CountriesRepoFake extends CountriesRepo {
-  constructor(private readonly _loadingService: LoadingService) {
+  loading$ = this._store.select(getLoading);
+
+  constructor(private readonly _store: Store<AppState>) {
     super();
   }
 
@@ -261,9 +266,10 @@ export class CountriesRepoFake extends CountriesRepo {
 
     if (name) {
       console.log(name);
-      result = countriesFake.filter((country) => country.name.toLowerCase().includes(name.toLowerCase()));
+      result = countriesFake.filter((country) =>
+        country.name.toLowerCase().includes(name.toLowerCase())
+      );
       console.log(result);
-
     }
 
     return this.delay<Result<Country[]>>(
@@ -299,11 +305,11 @@ export class CountriesRepoFake extends CountriesRepo {
   }
 
   private delay<T>(observable: Observable<T>): Observable<T> {
-    this._loadingService.isLoading.next(true);
+    this._store.dispatch(setLoading({ loading: true }));
     return observable.pipe(
-      delay(100 + Math.random() * 400),
+      delay(1000 + Math.random() * 400),
       tap(() => {
-        this._loadingService.isLoading.next(false);
+        this._store.dispatch(setLoading({ loading: false }));
       })
     );
   }

@@ -8,6 +8,7 @@ import { LoadingService } from 'src/app/shared/service/loading.service';
 import { AppState } from 'src/app/state/app.state';
 import { loadCountries } from 'src/app/state/countries/countries.actions';
 import { getCountries } from 'src/app/state/countries/countries.selector';
+import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { Country } from '../../shared/model/country.model';
 
 @Component({
@@ -17,10 +18,10 @@ import { Country } from '../../shared/model/country.model';
 })
 export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
   countries$!: Observable<Country[]>;
+  loading$ = this._store.select(getLoading);
 
   constructor(
     private readonly _route: ActivatedRoute,
-    public loadingService: LoadingService,
     private readonly _store: Store<AppState>
   ) {
     super();
@@ -36,14 +37,5 @@ export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
       const filter: CountryFilter = { ...params, page: 1 };
       this._store.dispatch(loadCountries(filter));
     });
-
-    // this.paginator = {
-    //   length: Math.ceil(totalResult / 20),
-    //   pageSize,
-    //   previousPageIndex: 0,
-    //   pageIndex: page + 1,
-    //   pageSizeOptions: [5, 10, 20],
-    // };
-    // });
   }
 }

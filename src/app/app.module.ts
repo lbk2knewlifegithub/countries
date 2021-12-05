@@ -29,7 +29,7 @@ import { CountriesEffect } from './state/countries/countries.effect';
     AppRoutingModule,
     FormsModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CountriesEffect])
+    EffectsModule.forRoot([CountriesEffect]),
   ],
   providers: [
     {
