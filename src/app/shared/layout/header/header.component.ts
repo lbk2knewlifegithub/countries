@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { Theme } from '../../components/theme/theme.mode';
@@ -18,7 +18,7 @@ export class HeaderComponent {
     src: '/assets/icons/moon-outline-dark.png',
   };
 
-  loading$ = this._store.select(getLoading);
+  loading$ = this._store.pipe(select(getLoading));
 
-  constructor( private readonly _store: Store<AppState>) {  }
+  constructor( private readonly _store: Store<AppState>) { }
 }

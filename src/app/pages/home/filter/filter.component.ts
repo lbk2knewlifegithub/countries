@@ -1,17 +1,25 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { FilterState } from 'src/app/state/filter/filter.state';
 @Component({
   selector: 'lbk-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent {
-  filters: string[] = ['All', 'Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+export class FilterComponent implements OnInit {
+  regions: string[] = ['All', 'Africa', 'America', 'Asia', 'Europe', 'Oceania'];
+  @Input('filter') filter!: FilterState;
+  ngOnInit(): void {}
 
-  current: string = this.filters[0];
+  get current() {
+    return !this.filter.region ? 'All' : this.filter.region;
+  }
 
-  @Output() filterChange = new EventEmitter<string>();
-  @Input() isDark!: boolean;
+   queryParams(region: string) {
+     console.log(region);
 
+    const {name} = this.filter;
+    if (region === 'All') return {name};
+
+    return {region, name};
+  }
 }

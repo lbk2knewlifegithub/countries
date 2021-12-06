@@ -1,11 +1,11 @@
 <div class='container pb-20 mt-8'>
   <nav class="flex flex-col gap-10 md:flex-row md:items-center md:justify-between">
     <!--    search bar-->
-    <lbk-search-bar class="block max-w-lg md:flex-grow"></lbk-search-bar>
+    <lbk-search-bar [filter]="filter" class="block max-w-lg md:flex-grow"></lbk-search-bar>
     <!--    end search bar-->
 
     <!--    filter-->
-    <lbk-filter class="block "></lbk-filter>
+    <lbk-filter [filter]="filter"></lbk-filter>
     <!--    filter-->
   </nav>
 

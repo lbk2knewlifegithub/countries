@@ -6,6 +6,6 @@ export const countryReducer = createReducer(
   initialCountryState,
   on(setCountry, (state, { country }) => {
     if (!country) return undefined;
-    return { ...state, ...country };
+    return { ...country };
   })
 );

@@ -3,8 +3,14 @@ import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Unsubscribe } from 'src/app/shared/components/unsubscribe.component';
 import { AppState } from 'src/app/state/app.state';
-import { loadCountries } from 'src/app/state/countries/countries.actions';
 import { getCountries } from 'src/app/state/countries/countries.selector';
+import { setFilter } from 'src/app/state/filter/filter.actions';
+import {
+  getFilter,
+  getFilterRegion
+} from 'src/app/state/filter/filter.selector';
+import { FilterState } from 'src/app/state/filter/filter.state';
+import { loading } from 'src/app/state/shared-state/shared.actions';
 import { getLoading } from 'src/app/state/shared-state/shared.selector';
 
 @Component({
@@ -15,6 +21,8 @@ import { getLoading } from 'src/app/state/shared-state/shared.selector';
 export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
   countries$ = this._store.select(getCountries);
   loading$ = this._store.select(getLoading);
+  region$ = this._store.select(getFilterRegion);
+  filter!: FilterState;
 
   constructor(
     private readonly _route: ActivatedRoute,
@@ -25,11 +33,15 @@ export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._subscribeParams();
+    this.appendSub = this._store.select(getFilter).subscribe((filter) => {
+      this.filter = filter;
+    });
   }
 
   private _subscribeParams() {
     this.appendSub = this._route.queryParams.subscribe(async (params) => {
-      this._store.dispatch(loadCountries({ ...params }));
+      this._store.dispatch(loading());
+      this._store.dispatch(setFilter({ filter: { ...params } }));
     });
   }
 }

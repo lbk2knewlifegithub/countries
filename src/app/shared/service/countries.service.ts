@@ -17,7 +17,7 @@ export class CountriesService {
     const { name, region } = countryFilter;
 
     if (region && name) {
-      return this.findByRegion(name).pipe(
+      return this.findByName(name).pipe(
         map((countries) =>
           countries.filter((country) => country.region === region)
         )

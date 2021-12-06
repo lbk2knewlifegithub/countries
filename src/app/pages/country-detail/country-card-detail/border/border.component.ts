@@ -6,7 +6,6 @@ import {
   Input,
   OnInit
 } from '@angular/core';
-import { Router } from '@angular/router';
 import { catchError, of } from 'rxjs';
 import { Unsubscribe } from 'src/app/shared/components/unsubscribe.component';
 import { Country } from 'src/app/shared/model/country.model';
@@ -17,6 +16,7 @@ import { CountriesRepo } from 'src/app/shared/repo/countries/countries.repo';
   selector: 'lbk-border',
   templateUrl: './border.component.html',
   styleUrls: ['./border.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BorderComponent extends Unsubscribe implements OnInit {
   @Input() borderCode!: string;
@@ -26,22 +26,25 @@ export class BorderComponent extends Unsubscribe implements OnInit {
   constructor(
     @Inject(CountriesRepoImpl)
     private readonly _repo: CountriesRepo,
+    private readonly _ref: ChangeDetectorRef
   ) {
     super();
   }
   ngOnInit(): void {
     this.loading = true;
-    this.appendSub = this._repo.getCountryByCode(this.borderCode)
+    this.appendSub = this._repo
+      .getCountryByCode(this.borderCode)
       .pipe(
         catchError((error) => {
+          this.loading = false;
+          this._ref.detectChanges();
           return of(undefined);
         })
       )
       .subscribe((country) => {
         this.country = country;
-        this.loading = false
-        console.log(country);
+        this.loading = false;
+        this._ref.detectChanges();
       });
   }
-
 }

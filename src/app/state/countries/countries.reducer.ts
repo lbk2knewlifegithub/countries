@@ -4,5 +4,5 @@ import { initialState } from './countries.state';
 
 export const countriesReducer = createReducer(
   initialState,
-  on(setCountries, (state, {countries}) => [...state, ...countries])
+  on(setCountries, (_, {countries}) => [...countries])
 );

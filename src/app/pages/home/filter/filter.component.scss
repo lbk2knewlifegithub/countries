@@ -1,0 +1,9 @@
+#regions {
+  li {
+    a {
+      &.active {
+        background-color: var(--tw-indigo-500, red);
+      }
+    }
+  }
+}

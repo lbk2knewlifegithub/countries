@@ -7,6 +7,8 @@ import { SharedState } from './shared-state/shared.state';
 import { RouterReducerState, routerReducer } from '@ngrx/router-store';
 import { COUNTRY_STATE_NAME } from './country/country.selector';
 import { countryReducer } from './country/country.reducer';
+import { FILTER_STATE_NAME } from './filter/filter.selector';
+import { filterReducer } from './filter/filter.reducer';
 
 export interface AppState {
   countries: Country[];
@@ -19,5 +21,6 @@ export const appReducer = {
   [COUNTRIES_STATE_NAME]: countriesReducer,
   [COUNTRY_STATE_NAME]: countryReducer,
   [SHARED_STATE_NAME]: sharedReducer,
+  [FILTER_STATE_NAME]: filterReducer,
   router: routerReducer
 };

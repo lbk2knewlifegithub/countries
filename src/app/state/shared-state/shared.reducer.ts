@@ -4,7 +4,7 @@ import { initialSharedState, SharedState } from './shared.state';
 
 const _sharedReducer = createReducer(
   initialSharedState,
-  on(setLoading, (state, { loading }) => ({ ...state, loading }))
+  on(setLoading, (state, { loading }) => ({  loading }))
 );
 
 export function sharedReducer(state: SharedState | undefined, action: Action) {
