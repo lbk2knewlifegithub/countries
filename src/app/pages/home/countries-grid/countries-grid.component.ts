@@ -18,6 +18,6 @@ export class CountriesGridComponent {
   @Output() countryChange = new EventEmitter<Country>();
 
   countryIdentify(index: number, country: Country) {
-    return country._id;
+    return country.name;
   }
 }

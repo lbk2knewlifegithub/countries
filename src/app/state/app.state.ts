@@ -9,6 +9,8 @@ import { COUNTRY_STATE_NAME } from './country/country.selector';
 import { countryReducer } from './country/country.reducer';
 import { FILTER_STATE_NAME } from './filter/filter.selector';
 import { filterReducer } from './filter/filter.reducer';
+import { THEME_STATE_NAME } from './theme/theme.selector';
+import { themeReducer } from './theme/theme.reducer';
 
 export interface AppState {
   countries: Country[];
@@ -22,5 +24,6 @@ export const appReducer = {
   [COUNTRY_STATE_NAME]: countryReducer,
   [SHARED_STATE_NAME]: sharedReducer,
   [FILTER_STATE_NAME]: filterReducer,
+  [THEME_STATE_NAME]: themeReducer,
   router: routerReducer
 };

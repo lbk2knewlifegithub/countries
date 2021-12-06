@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { Unsubscribe } from 'src/app/shared/components/unsubscribe.component';
 import { FilterState } from 'src/app/state/filter/filter.state';
@@ -12,8 +13,9 @@ import { FilterState } from 'src/app/state/filter/filter.state';
 export class SearchBarComponent extends Unsubscribe implements OnInit {
   queryChanged = new Subject<string>();
   @Input('filter') filter!: FilterState;
+  @Input('loading') loading!: boolean;
 
-  constructor(private readonly _router: Router) {
+  constructor( private readonly _router: Router) {
     super();
   }
 

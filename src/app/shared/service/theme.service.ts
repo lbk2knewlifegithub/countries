@@ -1,70 +1,21 @@
 import { Injectable } from '@angular/core';
-import { Theme } from '../components/theme/theme.mode';
+import { ThemeState } from 'src/app/state/theme/theme.state';
 
-@Injectable({ providedIn: "root" })
+@Injectable({ providedIn: 'root' })
 export class ThemeService {
-
-  darkTheme: Theme = {
-    name: "Light Mode",
-    src: "/assets/icons/sun-outline-dark.png"
-  };
-  /**
-   * - Current Theme
-   */
-  theme = this.darkTheme;
-
-  isLight = true;
-
-  constructor() {
-    this.loadTheme();
+  loadTheme(): ThemeState | undefined {
+    const theme = localStorage.getItem('theme');
+    return !theme ? undefined : JSON.parse(theme);
   }
 
-  toggle(): void {
-    // When is Light theme will change to dark theme
-    if (this.isLight) this.toDarkTheme();
-
-    // When is dark theme will change to light theme
-    else this.toLightTheme();
-
-    // backup theme to local storage
-    this.backup();
+  backup(theme: ThemeState): void {
+    localStorage.setItem('theme', JSON.stringify(theme));
   }
 
-  /**
-   * - Change to Dark Theme
-   * @private
-   */
-  private toDarkTheme(): void {
-    // this.theme = this.lightTheme;
-    this.isLight = false;
+  setTheme(theme: ThemeState): void {
+    const { darkTheme } = theme;
+
+    if (darkTheme) return document.body.classList.add('dark-theme');
+    document.body.classList.remove('dark-theme');
   }
-
-  /**
-   * - Change to Light Theme
-   * @private
-   */
-  private toLightTheme(): void {
-    this.theme = this.darkTheme;
-    this.isLight = true;
-  }
-
-  private loadTheme(): void {
-    const isLight = localStorage.getItem("theme");
-
-    if (!isLight || isLight === "true") {
-      this.toLightTheme();
-    } else {
-      this.toDarkTheme();
-    }
-  }
-
-
-  private backup(): void {
-    localStorage.setItem("theme", String(this.isLight));
-  }
-
-  get isDark(): boolean {
-    return !this.isLight;
-  }
-
 }

@@ -20,6 +20,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { SharedEffects } from './state/shared-state/shared.effect';
 import { FilterEffects } from './state/filter/filter.effects';
+import { ThemeEffects } from './state/theme/theme.effects';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { FilterEffects } from './state/filter/filter.effects';
     FormsModule,
     ProcessBarLoadingModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CountriesEffect, CountryEffects, SharedEffects, FilterEffects]),
+    EffectsModule.forRoot([CountriesEffect, CountryEffects, SharedEffects, FilterEffects, ThemeEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [

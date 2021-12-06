@@ -2,7 +2,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { catchError, finalize, map, mergeMap, of, tap } from 'rxjs';
-import { CountriesRepoFake } from 'src/app/shared/repo/countries/countries-fake.repo';
 import { CountriesRepoImpl } from 'src/app/shared/repo/countries/countries-impl.repo';
 import { CountriesRepo } from 'src/app/shared/repo/countries/countries.repo';
 import { AppState } from '../app.state';
@@ -14,12 +13,14 @@ export class CountryEffects {
   findCountry$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(findCountry),
-      mergeMap(({ fullName }) => this._repo.findCountryByFullName(fullName).pipe(
-        tap(() => this._store.dispatch(setLoading({loading: true}))),
-        map((country) => setCountry({ country })),
-        catchError((error) => of(setCountry({ country: undefined }))),
-        finalize(() => this._store.dispatch(setLoading({ loading: false })))
-      ))
+      mergeMap(({ fullName }) =>
+        this._repo.findCountryByFullName(fullName).pipe(
+          tap(() => this._store.dispatch(setLoading({ loading: true }))),
+          map((country) => setCountry({ country })),
+          catchError((error) => of(setCountry({ country: undefined }))),
+          finalize(() => this._store.dispatch(setLoading({ loading: false })))
+        )
+      )
     );
   });
 

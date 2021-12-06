@@ -1,13 +1,28 @@
 <div class="relative flex items-center gap-6 rounded-md shadow-lg ">
-  <!-- search icon -->
-  <div class="absolute px-8 text-xl text-fill/50">
-    <i class="text-2xl fas fa-search"></i>
+
+  <div class="absolute px-8 text-xl cursor-pointer text-fill/50">
+    <!-- loading -->
+    <lbk-circle-loading-small *ngIf="loading; else glass"></lbk-circle-loading-small>
+    <!-- end loading -->
+
+    <!-- search icon -->
+    <ng-template #glass>
+      <i class="text-2xl fas fa-search"></i>
+    </ng-template>
+    <!-- end search icon -->
   </div>
-  <!-- end search icon -->
 
   <!-- search input -->
-  <input [ngModel]="filter.name"
-  (ngModelChange)="onSearch($event)" class="py-4 pl-20 border-none" placeholder="Search for a country..." type="text">
+  <input [ngModel]="filter.name" (ngModelChange)="onSearch($event)" class="py-4 pl-20 border-none"
+    placeholder="Search for a country..." type="text">
   <!-- end search input -->
 
+
+  <!-- clear button -->
+  <div (click)="onSearch('')"   *ngIf="filter.name" class="absolute p-4 text-xl -translate-y-1/2 cursor-pointer top-1/2 right-4 text-fill/50">
+    <!-- search icon -->
+      <i class="text-2xl fas fa-times"></i>
+    <!-- end search icon -->
+  </div>
+  <!-- end clear button -->
 </div>

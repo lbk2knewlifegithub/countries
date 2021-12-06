@@ -7,12 +7,12 @@
   <nav class="container flex items-center justify-between py-6 ">
 
     <!-- logo -->
-    <h1 class="text-xl font-black lg:text-2xl">Where in the world?</h1>
+    <a routerLink="/home" [queryParams]="filter" class="text-xl font-black lg:text-2xl">Where in the world?</a>
     <!-- end logo -->
 
 
     <!-- theme -->
-    <lbk-theme [isDarkTheme]="true"></lbk-theme>
+    <lbk-theme (click)="toggleTheme()" [darkTheme]="darkTheme"></lbk-theme>
     <!-- end theme -->
   </nav>
 </header>

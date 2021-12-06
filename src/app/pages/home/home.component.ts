@@ -20,9 +20,9 @@ import { getLoading } from 'src/app/state/shared-state/shared.selector';
 })
 export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
   countries$ = this._store.select(getCountries);
-  loading$ = this._store.select(getLoading);
   region$ = this._store.select(getFilterRegion);
   filter!: FilterState;
+  loading!: boolean;
 
   constructor(
     private readonly _route: ActivatedRoute,
@@ -33,8 +33,18 @@ export class HomeComponent extends Unsubscribe implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this._subscribeParams();
+    this._subscribeFilter();
+    this._subscribeLoading();
+  }
+
+  private _subscribeFilter() {
     this.appendSub = this._store.select(getFilter).subscribe((filter) => {
       this.filter = filter;
+    });
+  }
+  private _subscribeLoading() {
+    this.appendSub = this._store.select(getLoading).subscribe((loading) => {
+      this.loading = loading;
     });
   }
 

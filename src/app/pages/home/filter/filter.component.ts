@@ -22,4 +22,8 @@ export class FilterComponent implements OnInit {
 
     return {region, name};
   }
+
+  identifyRegion(index: number, region: string) {
+    return index;
+  }
 }

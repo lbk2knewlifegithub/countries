@@ -12,7 +12,7 @@
   <!--  dropdown items-->
   <div role="items" class="z-50">
     <ul id="regions" class="absolute grid w-full gap-4 p-6 text-lg rounded-lg shadow-lg bg-fill">
-      <ng-container *ngFor='let region of regions'>
+      <ng-container *ngFor='let region of regions;trackBy:identifyRegion'>
         <li>
           <a routerLinkActive="active" routerLink="/home"
             [queryParams]="queryParams(region)"
