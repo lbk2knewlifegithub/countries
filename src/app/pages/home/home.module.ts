@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CircleLoadingSmallModule } from 'src/app/shared/components/circle-loading-small/circle-loading-small.module';
 import { CircleLoadingModule } from 'src/app/shared/components/circle-loading/circle-loading.module';
 import { DropdownModule } from 'src/app/shared/components/dropdown/basic-dropdown.module';
+import { SkeletonModule } from 'src/app/shared/components/skeleton/skeleton.module';
 import { CountriesGridComponent } from './countries-grid/countries-grid.component';
 import { CountryCardComponent } from './countries-grid/country-card/country-card.component';
 import { FilterComponent } from './filter/filter.component';
@@ -18,7 +19,8 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     DropdownModule,
     FormsModule,
     CircleLoadingModule,
-    CircleLoadingSmallModule
+    CircleLoadingSmallModule,
+    SkeletonModule
   ],
   exports: [],
   declarations: [

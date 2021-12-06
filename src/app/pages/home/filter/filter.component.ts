@@ -15,8 +15,6 @@ export class FilterComponent implements OnInit {
   }
 
    queryParams(region: string) {
-     console.log(region);
-
     const {name} = this.filter;
     if (region === 'All') return {name};
 

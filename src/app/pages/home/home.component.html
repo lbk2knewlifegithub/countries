@@ -10,10 +10,18 @@
   </nav>
 
   <!-- loading -->
-  <div *ngIf="loading;else display" class="grid mt-20 place-content-center">
-    <lbk-circle-loading></lbk-circle-loading>
+  <div *ngIf="loading;else display" class='relative grid gap-10 mt-10 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
+
+    <lbk-circle-loading class="absolute z-50 -translate-x-1/2 top-11 left-1/2"></lbk-circle-loading>
+
+    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton></lbk-skeleton>
   </div>
-  <!-- end loading -->
+
 
   <ng-template #display>
     <!--    main countries-->
