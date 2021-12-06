@@ -15,5 +15,5 @@ export interface Country {
   tld: string[];
   currencies: string[];
   languages: string[];
-  borders: string[];
+  borders?: string[];
 }

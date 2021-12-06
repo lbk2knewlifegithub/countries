@@ -1,6 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import { getLoading } from 'src/app/state/shared-state/shared.selector';
 import { Theme } from '../../components/theme/theme.mode';
 import { ThemeService } from '../../service/theme.service';
+
 
 @Component({
   selector: 'lbk-header',
@@ -14,5 +18,7 @@ export class HeaderComponent {
     src: '/assets/icons/moon-outline-dark.png',
   };
 
-  constructor(public themeService: ThemeService) {}
+  loading$ = this._store.select(getLoading);
+
+  constructor( private readonly _store: Store<AppState>) {  }
 }

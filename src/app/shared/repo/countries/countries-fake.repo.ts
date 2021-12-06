@@ -300,7 +300,7 @@ export class CountriesRepoFake extends CountriesRepo {
     this._store.dispatch(setLoading({ loading: true }));
 
     return observable.pipe(
-      delay(2000),
+      delay(100),
       finalize(() => {
         this._store.dispatch(setLoading({ loading: false }));
       })

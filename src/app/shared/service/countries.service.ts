@@ -59,12 +59,8 @@ export class CountriesService {
       .pipe(map((countriesEntity) => countriesEntity[0]));
   }
 
-  findByCodeCCA3(cca3: string): Observable<CountryEntity | undefined> {
-    const url = `https://restcountries.com/v3.1/alpha/${cca3}`;
-    return this.http.get<CountryEntity[]>(url).pipe(
-      map((countriesEntity) => {
-        return countriesEntity[0];
-      })
-    );
+  getCountryByCode(code: string): Observable<CountryEntity | undefined> {
+    const url = `https://restcountries.com/v3.1/alpha/${code.toLowerCase()}`;
+    return this.http.get<CountryEntity[]>(url).pipe( map((countriesEntity) => { return countriesEntity[0]; }));
   }
 }

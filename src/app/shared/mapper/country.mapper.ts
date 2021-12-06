@@ -26,8 +26,6 @@ export class CountryMapper implements EntityMapper<CountryEntity, Country> {
 
   flagMapper(entity: CountryEntity): string {
     const { flags: { png, svg }, } = entity;
-    console.log(entity.flags);
-
     if (png) return png;
     if (svg) return svg;
     return '';
@@ -53,7 +51,7 @@ export class CountryMapper implements EntityMapper<CountryEntity, Country> {
       tld: entity.tld,
       flag: this.flagMapper(entity),
       // borders: entity.borders,
-      borders: [],
+      borders: entity.borders,
       cca3: entity.cca3,
       ccn3: entity.ccn3,
     };

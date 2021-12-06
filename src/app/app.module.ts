@@ -15,6 +15,9 @@ import { HeaderComponent } from './shared/layout/header/header.component';
 import { CustomReuseStrategy } from './shared/utils/custom-reuse.strategy';
 import { appReducer } from './state/app.state';
 import { CountriesEffect } from './state/countries/countries.effect';
+import { CountryEffects } from './state/country/country.effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -31,14 +34,15 @@ import { CountriesEffect } from './state/countries/countries.effect';
     FormsModule,
     ProcessBarLoadingModule,
     StoreModule.forRoot(appReducer),
-    EffectsModule.forRoot([CountriesEffect]),
+    EffectsModule.forRoot([CountriesEffect, CountryEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true,
-    },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: LoadingInterceptor,
+    //   multi: true,
+    // },
     {
       provide: RouteReuseStrategy,
       useClass: CustomReuseStrategy,

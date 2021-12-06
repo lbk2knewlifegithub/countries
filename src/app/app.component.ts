@@ -1,7 +1,4 @@
-import {
-  ChangeDetectionStrategy, Component,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Unsubscribe } from './shared/components/unsubscribe.component';
 import { AppState } from './state/app.state';
@@ -14,11 +11,7 @@ import { getLoading } from './state/shared-state/shared.selector';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent extends Unsubscribe implements OnInit {
-  loading$ = this._store.select(getLoading);
-  constructor(private readonly _store: Store<AppState>) {
-    super();
-  }
+  constructor( private readonly _store: Store<AppState>) { super(); }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 }

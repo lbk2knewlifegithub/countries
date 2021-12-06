@@ -71,7 +71,7 @@ export interface CountryEntity {
   translations: { [key: string]: CallingEntity };
   latlng: number[];
   landlocked: boolean;
-  borders?: { [key: string]: string };
+  borders?: string[];
   area: number;
   demonyms?: DemonymsEntity;
   // flag code

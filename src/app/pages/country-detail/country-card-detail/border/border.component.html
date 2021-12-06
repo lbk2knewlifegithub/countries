@@ -1,5 +1,9 @@
-<lbk-circle-loading-small *ngIf="country$ | async as country;else border"></lbk-circle-loading-small>
+<!-- loading -->
+<div *ngIf="loading" class="p-2 shadow-lg">
+  <lbk-circle-loading-small></lbk-circle-loading-small>
+</div>
+<!-- end loading -->
 
-<ng-template #border>
-  <a class="px-6 py-2 rounded-md shadow-lg" href="#">{{}}</a>
-</ng-template>
+
+<a *ngIf="country" class="px-6 py-2 rounded-md shadow-lg"
+  [routerLink]="['/details',country.name ]">{{country!.name}}</a>

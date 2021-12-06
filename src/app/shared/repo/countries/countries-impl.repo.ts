@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, switchMap } from 'rxjs';
+import { catchError, Observable, of, switchMap } from 'rxjs';
 import { CountryMapper } from '../../mapper/country.mapper';
 import { CountryFilter } from '../../model/country-filter.model';
 import { Country } from '../../model/country.model';
@@ -41,12 +41,15 @@ export class CountriesRepoImpl implements CountriesRepo {
       switchMap((countryEntity) => {
         if (!countryEntity) return of(undefined);
         return of(this._mapper.mapToDomain(countryEntity));
+      }),
+      catchError((error) => {
+        return of(undefined);
       })
     );
   }
 
   getCountryByCode(cca3: string): Observable<Country | undefined> {
-    return this._countriesService.findByCodeCCA3(cca3).pipe(
+    return this._countriesService.getCountryByCode(cca3).pipe(
       switchMap((countryEntity) => {
         if (!countryEntity) return of(undefined);
         return of(this._mapper.mapToDomain(countryEntity));
