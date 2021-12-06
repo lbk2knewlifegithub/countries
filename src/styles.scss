@@ -27,7 +27,7 @@
     // background colors ////////
     /////////////////////////////
     --bg-fill: var(--very-light-gray);
-    --bg-input: var(--dark-gray);
+    --bg-elements: var(--white);
 
     .dark-theme {
       ////////////////////
@@ -39,7 +39,7 @@
       // background colors ////////
       /////////////////////////////
       --bg-fill: var(--very-dark-blue);
-      --bg-input: var(--dark-blue);
+      --bg-elements: var(--dark-blue);
     }
   }
 
@@ -47,7 +47,7 @@
   [type="text"],
   [type="email"],
   select {
-    @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-4 focus:ring-offset-4 focus:ring-indigo-500;
+    @apply w-full bg-elements rounded-lg shadow-sm focus:border-indigo-500 focus:ring-4  focus:ring-indigo-500;
   }
 }
 

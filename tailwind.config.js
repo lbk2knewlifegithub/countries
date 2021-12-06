@@ -43,6 +43,7 @@ module.exports = {
       // create custom background colors here
       backgroundColor: {
         fill: withOpacity("--bg-fill"),
+        elements: withOpacity("--bg-elements"),
         // footer: withOpacity("--bg-footer"),
       },
       borderColor: {

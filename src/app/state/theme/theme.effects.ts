@@ -12,8 +12,8 @@ export class ThemeEffects {
       mergeMap(({ darkTheme }) =>
         of(setTheme({ darkTheme })).pipe(
           finalize(() => {
-             this._themeService.backup({ darkTheme });
-             this._themeService.setTheme({ darkTheme });
+            this._themeService.backup({ darkTheme });
+            this._themeService.setTheme({ darkTheme });
           })
         )
       )
@@ -25,7 +25,11 @@ export class ThemeEffects {
       ofType(loadTheme),
       mergeMap(() => {
         return of(this._themeService.loadTheme()).pipe(
-          map((theme) => setTheme({ darkTheme: theme ? theme.darkTheme : false }))
+          map((theme) => {
+            const darkTheme = theme ? theme.darkTheme : false;
+            this._themeService.setTheme({ darkTheme });
+            return setTheme({ darkTheme });
+          })
         );
       })
     )

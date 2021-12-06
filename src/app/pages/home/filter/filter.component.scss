@@ -2,7 +2,7 @@
   li {
     a {
       &.active {
-        background-color: var(--tw-indigo-500, red);
+        @apply bg-indigo-400 font-bold;
       }
     }
   }

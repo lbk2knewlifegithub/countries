@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, switchMap } from 'rxjs';
+import { catchError, Observable, of, share, shareReplay, switchMap } from 'rxjs';
 import { CountryMapper } from '../../mapper/country.mapper';
 import { CountryFilter } from '../../model/country-filter.model';
 import { Country } from '../../model/country.model';
@@ -17,6 +17,7 @@ export class CountriesRepoImpl implements CountriesRepo {
     return this._countriesService
       .getAllCountries(filter)
       .pipe(
+        shareReplay(1),
         switchMap((response) =>
           of(
             response.map((countryEntity) =>

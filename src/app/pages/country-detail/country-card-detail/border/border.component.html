@@ -1,9 +1,9 @@
 <!-- loading -->
-<div *ngIf="loading" class="p-2 shadow-lg">
+<div *ngIf="loading" class="p-2 shadow-lg bg-elements">
   <lbk-circle-loading-small></lbk-circle-loading-small>
 </div>
 <!-- end loading -->
 
 
-<a *ngIf="country" class="px-6 py-2 rounded-md shadow-lg"
+<a *ngIf="country" class="px-6 py-2 rounded-md shadow-lg bg-elements"
   [routerLink]="['/details',country.name ]">{{country!.name}}</a>
