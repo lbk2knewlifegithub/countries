@@ -32,7 +32,7 @@ export class CountriesService {
       return this.findByRegion(region);
     }
 
-    return this.http.get<CountryEntity[]>(`${env.apiRest}all`);
+    return this.http.get<CountryEntity[]>(`${env.api}all`);
   }
 
   /**
@@ -41,19 +41,19 @@ export class CountriesService {
    * @returns
    */
   findByName(name: string): Observable<CountryEntity[]> {
-    const url = `${env.apiRest}name/${name}`;
+    const url = `${env.api}name/${name}`;
     return this.http.get<CountryEntity[]>(url);
   }
 
   findByRegion(region: string): Observable<CountryEntity[]> {
-    const url = `${env.apiRest}region/${region}`;
+    const url = `${env.api}region/${region}`;
     return this.http.get<CountryEntity[]>(url);
   }
 
   findCountryByFullName(
     fullName: string
   ): Observable<CountryEntity | undefined> {
-    const url = `${env.apiRest}name/${fullName}?fullText=true`;
+    const url = `${env.api}name/${fullName}?fullText=true`;
     return this.http
       .get<CountryEntity[]>(url)
       .pipe(map((countriesEntity) => countriesEntity[0]));

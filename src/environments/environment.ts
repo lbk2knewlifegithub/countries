@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  apiRest: 'https://restcountries.com/v3.1/',
-  apiLocal: 'http://localhost:4200/api/'
+  api: 'https://restcountries.com/v3.1/',
 };
 
 /*
