@@ -14,12 +14,18 @@
 
     <lbk-circle-loading class="absolute z-50 -translate-x-1/2 top-11 left-1/2"></lbk-circle-loading>
 
-    <lbk-skeleton></lbk-skeleton>
-    <lbk-skeleton></lbk-skeleton>
-    <lbk-skeleton></lbk-skeleton>
-    <lbk-skeleton></lbk-skeleton>
-    <lbk-skeleton></lbk-skeleton>
-    <lbk-skeleton></lbk-skeleton>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
+    <lbk-skeleton-small></lbk-skeleton-small>
   </div>
 
 
@@ -35,7 +41,10 @@
       <!-- no countries -->
       <ng-template #empty>
         <div class="mt-20">
-          <h1 class="text-3xl italic font-bold text-center">Countries not found</h1>
+          <h1 class="text-xl italic font-bold text-center lg:text-3xl">No country match with name <span
+              class="text-indigo-400">{{filter.name}} </span> <span *ngIf="filter.region"> and region
+              <span class="text-indigo-400">{{filter.region}}.</span></span>
+          </h1>
         </div>
       </ng-template>
       <!-- end no countries -->
