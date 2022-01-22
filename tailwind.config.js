@@ -1,5 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 const { join } = require("path");
+const plugin = require("tailwindcss/plugin");
 
 function withOpacity(variableName) {
   return ({ opacityValue }) => {
@@ -22,8 +23,7 @@ module.exports = {
         DEFAULT: "1.5rem",
         sm: "2rem",
         lg: "4rem",
-        xl: "5rem",
-        "2xl": "6rem",
+        xl: "8rem",
       },
     },
     extend: {
@@ -45,5 +45,15 @@ module.exports = {
     },
   },
   // custom variants
-  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    require("@tailwindcss/line-clamp"),
+    plugin(function ({ addComponents }) {
+      addComponents({
+        ".container": {
+          maxWidth: "1440px",
+        },
+      });
+    }),
+  ],
 };

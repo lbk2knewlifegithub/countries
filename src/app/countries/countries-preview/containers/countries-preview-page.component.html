@@ -1,0 +1,29 @@
+<main class="container pb-20 mt-8">
+  <lbk-countries-preview-nav
+    [name]="(name$ | async)!"
+    [region]="(region$ | async)!"
+    (searchByName)="searchByName($event)"
+    (searchByRegion)="searchByRegion($event)"
+  ></lbk-countries-preview-nav>
+
+  <div [hidden]="(loading$ | async)!" *ngIf="countries$ | async as countries">
+    <lbk-countries-grid
+      *ngIf="countries.length > 0; else empty"
+      [countries]="countries"
+    ></lbk-countries-grid>
+    <!--    end countries grid-->
+
+    <ng-template #empty>
+      <lbk-countries-not-found
+        [name]="(name$ | async)!"
+        [region]="(region$ | async)!"
+      ></lbk-countries-not-found>
+    </ng-template>
+  </div>
+
+  <lbk-countries-loading
+    @fadeInOnEnter
+    @fadeOutOnLeave
+    *ngIf="(loading$ | async)!"
+  ></lbk-countries-loading>
+</main>

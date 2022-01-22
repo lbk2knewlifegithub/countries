@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import {
-  CallingEntity,
-  CountryEntity,
-  CurrencyEntity
-} from '../model/country-entity.model';
-import { Country } from '../model/country.model';
-import { EntityMapper } from '../model/entity-mapper.model';
+  CallingEntity, Country, CountryEntity,
+  CurrencyEntity, EntityMapper
+} from '@lbk/models';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +22,9 @@ export class CountryMapper implements EntityMapper<CountryEntity, Country> {
   }
 
   flagMapper(entity: CountryEntity): string {
-    const { flags: { png, svg }, } = entity;
+    const {
+      flags: { png, svg },
+    } = entity;
     if (png) return png;
     if (svg) return svg;
     return '';

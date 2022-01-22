@@ -1,0 +1,24 @@
+<lbk-dropdown #dropdown>
+  <button
+    dropDownToggle
+    class="flex gap-10 bg-elements rounded-lg py-4 px-6 shadow-lg items-center text-[18px]"
+  >
+    <span class="medium-semibold">Filter by {{ current }}</span>
+    <i class="fas fa-angle-down"></i>
+  </button>
+
+  <ng-template dropDownContent>
+    <ul class="grid gap-4 p-6 rounded-lg shadow-lg bg-elements">
+      <ng-container *ngFor="let region of regions; trackBy: identifyRegion">
+        <li>
+          <button
+            (click)="onRegion(region);dropdown.close()"
+            class="min-w-[110px] duration-500 cursor-pointer hover:bg-black hover:text-white"
+          >
+            {{ region }}
+          </button>
+        </li>
+      </ng-container>
+    </ul>
+  </ng-template>
+</lbk-dropdown>

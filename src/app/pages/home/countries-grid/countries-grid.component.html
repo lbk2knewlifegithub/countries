@@ -1,6 +1,0 @@
-<div class='grid gap-10 mt-10 place-content-center md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4'>
-  <ng-container *ngFor='let country of countries;trackBy: countryIdentify'>
-    <lbk-country-card [routerLink]="['/details',country.name ]" class="block cursor-pointer" (click)='countryChange.emit(country)'
-      [country]='country'></lbk-country-card>
-  </ng-container>
-</div>

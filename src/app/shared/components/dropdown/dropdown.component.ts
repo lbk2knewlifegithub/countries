@@ -2,26 +2,86 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input
+  ContentChild
 } from '@angular/core';
+import {
+  fadeInUpOnEnterAnimation,
+  fadeOutDownOnLeaveAnimation,
+  zoomInUpOnEnterAnimation,
+  zoomOutDownOnLeaveAnimation
+} from 'angular-animations';
+import { DropDownContentDirective } from './dropdown-content.directive';
+
 @Component({
   selector: 'lbk-dropdown',
-  templateUrl: './dropdown.component.html',
-  styleUrls: ['./dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <ng-content></ng-content>
+
+    <div
+      *ngIf="expanded"
+      @zoomInUpOnEnter
+      @zoomOutDownOnLeave
+      (mouseover)="mouseOverContent()"
+      (mouseleave)="mouseLeaveContent()"
+      class="absolute top-[calc(100%+20px)] z-50"
+      [id]="contentId"
+    >
+      <ng-template [ngTemplateOutlet]="content.templateRef"></ng-template>
+    </div>
+  `,
+  styles: [
+    `
+      :host {
+        position: relative;
+      }
+    `,
+  ],
+  animations: [
+    fadeOutDownOnLeaveAnimation(),
+    fadeInUpOnEnterAnimation(),
+    zoomInUpOnEnterAnimation(),
+    zoomOutDownOnLeaveAnimation(),
+  ],
 })
-export class DropdownComponent {
-  @Input() active = false;
+export class DropDownComponent {
+  static nextId = 0;
 
-  constructor(private readonly _ref: ChangeDetectorRef) {}
+  contentId = `dropdown-${++DropDownComponent.nextId}`;
 
-  onClick(): void {
-    this.active = !this.active;
+  hoverToggle = false;
+  hoverContent = false;
+
+  @ContentChild(DropDownContentDirective) content!: DropDownContentDirective;
+
+  constructor(private readonly _cd: ChangeDetectorRef) {}
+
+  maskForCheck() {
+    this._cd.markForCheck();
   }
-  onBlur(event: Event) {
+
+  get expanded(): boolean {
+    return this.hoverContent || this.hoverToggle;
+  }
+
+  mouseOverContent() {
+    if (this.hoverContent) return;
+
+    this.hoverContent = true;
+  }
+
+  mouseLeaveContent() {
+    if (!this.hoverContent) return;
+
     setTimeout(() => {
-      this.active = false;
-      this._ref.detectChanges();
-    }, 200);
+      this.hoverContent = false;
+      if (this.hoverToggle) return;
+      this.maskForCheck();
+    }, 1000);
+  }
+
+  close(){
+    this.hoverToggle = false;
+    this.hoverContent = false;
   }
 }
