@@ -18,12 +18,10 @@
   <!-- clear button -->
   <div
     (click)="onSearch('')"
-    [hidden]="name"
+    [hidden]="!name"
     class="absolute p-4 text-xl -translate-y-1/2 cursor-pointer top-1/2 right-4 text-fill/50"
   >
-    <!-- search icon -->
     <i class="text-2xl fas fa-times"></i>
-    <!-- end search icon -->
   </div>
   <!-- end clear button -->
 </div>

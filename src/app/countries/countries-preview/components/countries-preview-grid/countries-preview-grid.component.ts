@@ -7,7 +7,7 @@ import { Country } from '@lbk/models';
   template: `
     <ng-container *ngFor="let country of countries; trackBy: identifyCountry">
       <lbk-country-preview
-        [routerLink]="['/details', country.name]"
+        [routerLink]="['/country', country.name]"
         class="block cursor-pointer"
         [country]="country"
       ></lbk-country-preview>

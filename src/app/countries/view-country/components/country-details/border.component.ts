@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'lbk-country-border',
+  selector: 'lbk-border',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <a
       class="px-6 py-2 rounded-md shadow-lg bg-elements"
-      [routerLink]="['/details', border]"
+      [routerLink]="['/country', border]"
       >{{ border }}</a
     >
   `,

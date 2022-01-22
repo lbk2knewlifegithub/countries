@@ -25,33 +25,22 @@ export class CountriesRepoImpl implements CountriesRepo {
     );
   }
 
-  findCountryById(id: string): Observable<Country | undefined> {
-    return this._countriesService.findCountryById(id).pipe(
-      switchMap((countryEntity) => {
-        if (!countryEntity) return of(undefined);
-        return of(this._mapper.mapToDomain(countryEntity));
-      })
-    );
-  }
-
-  findCountryByFullName(fullName: string): Observable<Country | undefined> {
+  findCountryByFullName(fullName: string): Observable<Country> {
     return this._countriesService.findCountryByFullName(fullName).pipe(
       switchMap((countryEntity) => {
-        if (!countryEntity) return of(undefined);
         return of(this._mapper.mapToDomain(countryEntity));
       }),
-      catchError((error) => {
-        return of(undefined);
-      })
+      catchError((error) => of(error))
     );
   }
 
-  getCountryByCode(cca3: string): Observable<Country | undefined> {
-    return this._countriesService.getCountryByCode(cca3).pipe(
-      switchMap((countryEntity) => {
-        if (!countryEntity) return of(undefined);
-        return of(this._mapper.mapToDomain(countryEntity));
-      })
-    );
+  getCountryByCode(cca3: string): Observable<Country> {
+    return this._countriesService
+      .getCountryByCode(cca3)
+      .pipe(
+        switchMap((countryEntity) =>
+          of(this._mapper.mapToDomain(countryEntity))
+        )
+      );
   }
 }

@@ -1,3 +1,3 @@
 export * from './countries-preview';
-export * from './country-details';
+export * from './view-country';
 

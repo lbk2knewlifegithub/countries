@@ -8,6 +8,7 @@ import { Country } from '@lbk/models/country.model';
 })
 export class CountryDetailsComponent {
   @Input() country!: Country;
+  @Input() loadingBorders!: boolean;
 
   get borders() {
     return this.country?.borders;

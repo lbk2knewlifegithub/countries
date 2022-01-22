@@ -10,9 +10,9 @@ import { RouterModule } from '@angular/router';
           import('./countries').then((m) => m.CountriesPreviewModule),
       },
       {
-        path: 'details/:fullName',
+        path: 'country',
         loadChildren: () =>
-          import('./countries').then((m) => m.CountryDetailsModule),
+          import('./countries').then((m) => m.ViewCountryModule),
       },
       {
         path: '',

@@ -18,7 +18,7 @@ export const {
   selectAll: selectAllCountries,
 } = fromCountries.adapter.getSelectors(selectCountriesEntitiesState);
 
-export const selectSelectCountry = createSelector(
+export const selectSelectedCountry = createSelector(
   selectCountryEntities,
   selectSelectedCountryId,
   (entities, selectedId) => {

@@ -8,7 +8,7 @@ import { environment as env } from 'src/environments/environment';
 export class CountriesService {
   constructor(private http: HttpClient) {}
 
-  findCountryById(id: string): Observable<CountryEntity | undefined> {
+  findCountryById(id: string): Observable<CountryEntity> {
     throw new Error('Method not implemented.');
   }
 
@@ -49,16 +49,14 @@ export class CountriesService {
     return this.http.get<CountryEntity[]>(url);
   }
 
-  findCountryByFullName(
-    fullName: string
-  ): Observable<CountryEntity | undefined> {
+  findCountryByFullName(fullName: string): Observable<CountryEntity> {
     const url = `${env.api}name/${fullName}?fullText=true`;
     return this.http
       .get<CountryEntity[]>(url)
       .pipe(map((countriesEntity) => countriesEntity[0]));
   }
 
-  getCountryByCode(code: string): Observable<CountryEntity | undefined> {
+  getCountryByCode(code: string): Observable<CountryEntity> {
     const url = `https://restcountries.com/v3.1/alpha/${code.toLowerCase()}`;
     return this.http.get<CountryEntity[]>(url).pipe(
       map((countriesEntity) => {

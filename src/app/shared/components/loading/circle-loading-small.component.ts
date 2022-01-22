@@ -10,7 +10,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
         position: relative;
         width: 30px;
         height: 30px;
-        @apply animate-spin bg-red-900;
+        border-radius: 50%;
+        border: 4px solid transparent;
+        border-top: 4px solid red;
+        border-bottom: 4px solid red;
+        @apply animate-spin;
       }
     `,
   ],

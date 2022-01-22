@@ -7,4 +7,5 @@ export const COMPONENTS = [
   CountryNotExistedComponent,
   fromCountryDetails.BorderComponent,
   fromCountryDetails.CountryDetailsComponent,
+  fromCountryDetails.BorderListComponent,
 ];

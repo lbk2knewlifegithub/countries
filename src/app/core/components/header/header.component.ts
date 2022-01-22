@@ -14,7 +14,7 @@ import {
       <nav class="container flex items-center justify-between py-6">
         <!-- logo -->
         <!-- [queryParams]="filter" -->
-        <a routerLink="/home" class="text-xl font-black lg:text-2xl"
+        <a routerLink="/countries" class="text-xl font-black lg:text-2xl"
           >Where in the world?</a
         >
         <!-- end logo -->

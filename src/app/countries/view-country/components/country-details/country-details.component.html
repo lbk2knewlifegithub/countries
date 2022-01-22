@@ -78,16 +78,16 @@
       <!--        end sub information -->
 
       <!-- borders -->
-      <!-- <div
-        *ngIf="borders && borders.length > 0"
-        class="flex flex-wrap items-center gap-6"
-      >
-        <p class="inline-block py-2 font-semibold">Borders Countries:</p>
+      <div *ngIf="borders && borders.length > 0">
+        <lbk-circle-loading-small
+          *ngIf="loadingBorders; else borderList"
+          class="block"
+        ></lbk-circle-loading-small>
 
-        <ng-container *ngFor="let code of country.borders">
-          <lbk-border [borderCode]="code"></lbk-border>
-        </ng-container>
-      </div> -->
+        <ng-template #borderList>
+          <lbk-border-list [borders]="borders"></lbk-border-list>
+        </ng-template>
+      </div>
       <!-- end borders -->
     </div>
   </div>
