@@ -13,17 +13,13 @@ function withOpacity(variableName) {
 const isProduction = process.env.NODE_ENV === "production";
 
 module.exports = {
-  mode: "jit",
-  purge: {
-    enabled: isProduction,
-    content: [join(__dirname, "src/**/*.{html,ts}")],
-  },
+  content: [join(__dirname, "src/**/*.{html,ts}")],
   darkMode: "class", // or 'media' or 'class'
   theme: {
     container: {
       center: true,
       padding: {
-        DEFAULT: "1rem",
+        DEFAULT: "1.5rem",
         sm: "2rem",
         lg: "4rem",
         xl: "5rem",
@@ -44,20 +40,10 @@ module.exports = {
       backgroundColor: {
         fill: withOpacity("--bg-fill"),
         elements: withOpacity("--bg-elements"),
-        // footer: withOpacity("--bg-footer"),
       },
-      borderColor: {
-        // danger: withOpacity("--border-danger"),
-      },
+      borderColor: {},
     },
   },
   // custom variants
-  variants: {
-    extend: {},
-  },
-  plugins: [
-    require("@tailwindcss/forms"),
-    require("@tailwindcss/line-clamp"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/line-clamp")],
 };
