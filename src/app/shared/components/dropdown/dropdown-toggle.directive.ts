@@ -9,7 +9,6 @@ export class DropDownToggleDirective {
   @HostBinding('attr.aria-controls') ariaControls = this.dropdown.contentId;
 
   @HostListener('mouseenter') mouseOver() {
-    console.log("enter");
 
     if (this.dropdown.hoverToggle) return;
 

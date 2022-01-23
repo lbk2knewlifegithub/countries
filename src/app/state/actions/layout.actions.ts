@@ -1,10 +1,11 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 /**
  * - Dark Theme
  */
 export const loadTheme = createAction('[Layout] Load Theme');
 
-export const toDarkTheme = createAction('[Layout] To Dark Theme');
-export const toLightTheme = createAction('[Layout] To Light Theme');
-
+export const updateTheme = createAction(
+  '[Layout] Update Theme',
+  props<{ darkTheme: boolean }>()
+);

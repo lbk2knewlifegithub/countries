@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Country } from '@lbk/models';
 
 @Component({
-  selector: 'lbk-countries-grid',
+  selector: 'lbk-countries-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <ng-container *ngFor="let country of countries; trackBy: identifyCountry">
@@ -21,7 +21,7 @@ import { Country } from '@lbk/models';
     `,
   ],
 })
-export class CountriesGridComponent {
+export class CountriesListComponent {
   @Input() countries!: Country[];
 
   identifyCountry(index: number, country: Country) {

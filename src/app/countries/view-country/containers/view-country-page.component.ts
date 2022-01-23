@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Country } from '@lbk/models';
 import * as fromCountries from '@lbk/state/selectors/countries.selector';
 import { Store } from '@ngrx/store';
+import { zoomInOnEnterAnimation } from 'angular-animations';
 import { Observable } from 'rxjs';
 import * as fromViewCountryPage from '../reducers';
 
@@ -10,7 +11,11 @@ import * as fromViewCountryPage from '../reducers';
   selector: 'lbk-view-country-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <main *ngIf="country$ | async as country" class="container pb-32">
+    <main
+      @zoomInOnEnter
+      *ngIf="country$ | async as country"
+      class="container pb-32"
+    >
       <lbk-back-button
         (click)="onBack()"
         class="inline-block mt-10 rounded-lg bg-elements"
@@ -21,15 +26,11 @@ import * as fromViewCountryPage from '../reducers';
         [country]="country"
       ></lbk-country-details>
     </main>
-
-    <div *ngIf="(loading$ | async)!" class="grid mt-20 place-content-center">
-      <lbk-circle-loading-large></lbk-circle-loading-large>
-    </div>
   `,
+  animations: [zoomInOnEnterAnimation()],
 })
 export class ViewCountryPageComponent implements OnInit {
   country$!: Observable<Country | undefined | null | ''>;
-  loading$!: Observable<boolean>;
   loadingBorders$!: Observable<boolean>;
 
   constructor(

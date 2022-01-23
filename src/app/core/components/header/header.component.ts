@@ -31,7 +31,7 @@ import {
 })
 export class HeaderComponent {
   @Output() toggleTheme = new EventEmitter<void>();
+
   @Input() darkTheme!: boolean;
   @Input() loading!: boolean;
-  // @Input() filter!: string;
 }

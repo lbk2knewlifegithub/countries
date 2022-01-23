@@ -8,11 +8,17 @@ import { RouterModule } from '@angular/router';
         path: 'countries',
         loadChildren: () =>
           import('./countries').then((m) => m.CountriesPreviewModule),
+        data: {
+          animation: 'Countries',
+        },
       },
       {
         path: 'country',
         loadChildren: () =>
           import('./countries').then((m) => m.ViewCountryModule),
+        data: {
+          animation: 'Country',
+        },
       },
       {
         path: '',

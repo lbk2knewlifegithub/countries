@@ -22,8 +22,6 @@ export class CountryExistsGuard implements CanActivate {
     return this._store.select(fromInvoices.selectCountryEntities).pipe(
       map((entities) => entities[name]),
       tap((country) => {
-        console.log('guard ' + name);
-
         if (country)
           this._store.dispatch(ViewCountryPageActions.selectCountry({ name }));
       }),

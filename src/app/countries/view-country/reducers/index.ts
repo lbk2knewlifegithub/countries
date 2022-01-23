@@ -24,7 +24,7 @@ export const reducer = createReducer(
   on(
     CountriesApiAction.findBordersSuccess,
     CountriesApiAction.findBordersFailure,
-    (_) => ({
+    () => ({
       loadingBorders: false,
     })
   )

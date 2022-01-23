@@ -7,10 +7,10 @@
   ></lbk-countries-preview-nav>
 
   <div [hidden]="(loading$ | async)!" *ngIf="countries$ | async as countries">
-    <lbk-countries-grid
+    <lbk-countries-list
       *ngIf="countries.length > 0; else empty"
       [countries]="countries"
-    ></lbk-countries-grid>
+    ></lbk-countries-list>
     <!--    end countries grid-->
 
     <ng-template #empty>

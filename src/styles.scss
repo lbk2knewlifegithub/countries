@@ -29,7 +29,7 @@
     --bg-fill: var(--very-light-gray);
     --bg-elements: var(--white);
 
-    .dark-theme {
+    .dark {
       ////////////////////
       // text colors /////
       ////////////////////
@@ -43,7 +43,7 @@
     }
   }
 
-  body{
+  body {
     @apply font-mono text-fill bg-fill;
   }
 

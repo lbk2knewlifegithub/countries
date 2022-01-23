@@ -41,7 +41,6 @@ export class CountriesEffect {
         this._store.select(fromCountries.selectSelectedCountry)
       ),
       exhaustMap(([{ name }, country]) => {
-        console.log(name);
 
         if (!country)
           return of(

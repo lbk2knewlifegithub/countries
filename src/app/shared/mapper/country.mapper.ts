@@ -37,7 +37,6 @@ export class CountryMapper implements EntityMapper<CountryEntity, Country> {
   }
 
   mapToDomain(entity: CountryEntity): Country {
-    console.log(entity.borders);
 
     return {
       _id: entity._id,

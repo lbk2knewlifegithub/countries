@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Country, CountryFilter } from '@lbk/models';
 import { CountryMapper } from '@lbk/shared/mapper';
-import { CountriesService } from '@lbk/state/service/countries.service';
+import { CountriesService } from '@lbk/state/services/countries.service';
 import { catchError, Observable, of, shareReplay, switchMap } from 'rxjs';
 import { CountriesRepo } from './countries.repo';
 
